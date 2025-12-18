@@ -3,18 +3,6 @@
 ## 📝 Overview
 Terraform configuration for provisioning an EKS (Elastic Kubernetes Service) cluster for development environment.
 
-## 🏗️ Project Structure
-eks-dev-terraform/
-├── main.tf # Main Terraform configuration
-├── variables.tf # Variable definitions
-├── outputs.tf # Output definitions
-├── versions.tf # Provider and module versions
-├── scripts/ # Helper scripts
-├── k&s/ # Kubernetes manifests
-├── .gitignore # Git ignore rules
-└── README.md # This file
-
-
 ## ⚙️ Prerequisites
 - Terraform ≥ 1.0
 - AWS CLI configured
