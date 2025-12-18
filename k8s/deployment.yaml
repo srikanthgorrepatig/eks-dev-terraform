@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${var.app_name}
+  namespace: ${var.app_namespace}
+spec:
+  replicas: ${var.app_replicas}
+  selector:
+    matchLabels:
+      app: ${var.app_name}
+  template:
+    metadata:
+      labels:
+        app: ${var.app_name}
+        environment: dev
+    spec:
+      # Use spot instances if available
+      nodeSelector:
+        karpenter.sh/capacity-type: spot
+      containers:
+      - name: ${var.app_name}
+        image: ${aws_ecr_repository.dev_app.repository_url}:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "development"
+        - name: PORT
+          value: "3000"
+        # Minimal resources for dev
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        # Simple health checks
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5

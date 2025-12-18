@@ -1,0 +1,15 @@
+# Terraform files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Sensitive data
+*.tfvars
+*.tfvars.json
+
+# Local files
+**/.terraform.tfstate.lock.info
+**/.terraformrc
+**/terraform.rc

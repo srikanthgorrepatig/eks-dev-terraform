@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ${var.app_namespace}
+  labels:
+    environment: dev
+    cost-center: engineering
